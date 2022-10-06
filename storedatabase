@@ -1,0 +1,36 @@
+# SQL
+store database
+/**boots,
+vests,
+jackets,
+tacpants,
+jobshirt,
+tshirt,
+socks,
+gloves,
+hats,
+safety shoes,
+belts,
+watches,
+overals,
+ponchos,
+uniform shirts**/
+
+CREATE TABLE workwear (id INTEGER PRIMARY KEY, name TEXT, price INTEGER, type TEXT);
+
+INSERT INTO workwear VALUES (1, "boots", 59.99, "shoes");
+INSERT INTO workwear VALUES (2, "vests", 12.99, "accessory");
+INSERT INTO workwear VALUES (3, "jackets", 79.99, "clothing");
+INSERT INTO workwear VALUES (4, "tacpants", 70.00, "clothing");
+INSERT INTO workwear VALUES (5, "jobshirts", 59.99, "clothing");
+INSERT INTO workwear VALUES (6, "tshirts", 15.99, "clothing");
+INSERT INTO workwear VALUES (7, "socks", 8.99, "clothing");
+INSERT INTO workwear VALUES (8, "gloves" , 12.99, "accessory");
+INSERT INTO workwear VALUES (9, "hats", 10.99, "accessory");
+INSERT INTO workwear VALUES (10, "safety shoes", 49.99, "shoes");
+INSERT INTO workwear VALUES (11, "belts", 15.99, "accessory");
+INSERT INTO workwear VALUES (12, "watches", 29.99, "accessory");
+INSERT INTO workwear VALUES (13, "overals", 49.99, "clothing");
+INSERT INTO workwear VALUES (14, "ponchos", 12.99, "accessory");
+INSERT INTO workwear VALUES (15, "uniform shirts", 35.99, "clothing");
+SELECT * FROM workwear ORDER BY price asc
