@@ -1,0 +1,369 @@
+**/Source: https://www.kaggle.com/datasets/narayan63/netflix-popular-movies-dataset/**
+
+
+CREATE TABLE popular_netflix (id INTEGER PRIMARY KEY, title TEXT, year TEXT, certificate TEXT, duration_minutes INTEGER, genre TEXT, rating INTEGER);
+
+INSERT INTO popular_netflix VALUES (1, "Cobra Kai", 2018, "TV-14", 30, "Action, Comedy, Drama", 8.5);
+
+INSERT INTO popular_netflix VALUES (2, "The Crown", 2016, "TV-MA", 58, "Biography, Drama, History", 8.7);
+
+INSERT INTO popular_netflix VALUES (3, "Better Call Saul", "2015-2022", "TV-MA", 46, "Crime, Drama", 8.9);
+
+INSERT INTO popular_netflix VALUES (4, "Devil in Ohio", "2022", "TV-MA", 356, "Drama, Horror, Mystery", 5.9);
+
+INSERT INTO popular_netflix VALUES (5, "Cyberpunk: Edgerunners", "2022-", "TV-MA", 24, "Action, Adventure, Animation", 8.6);
+
+INSERT INTO popular_netflix VALUES (6, "The Sandman", "2022-", "TV-MA", 45, "Fantasy, Drama, Horror", 7.8);
+
+INSERT INTO popular_netflix VALUES (7, "Rick and Morty", "2013-", "TV-MA", 23, "Animation, Adventure, Comedy", 9.2);
+
+INSERT INTO popular_netflix VALUES (8, "Breaking Bad", "2008-2013", "TV-MA", 49, "Crime, Drama, Thriller", 9.5);
+
+INSERT INTO popular_netflix VALUES (9, "The Imperfects", "2022-", "TV-MA", 45, "Action, Adventure, Drama", 6.3);
+
+INSERT INTO popular_netflix VALUES (10, "Blonde", "2022", "NC-17", 166, "Biography, Drama, Mystery", 6.2);
+
+INSERT INTO popular_netflix VALUES (11, "Stranger Things", "2016-", "TV-14", 51, "Drama, Fantasy, Horror", 8.7);
+
+INSERT INTO popular_netflix VALUES (12, "End of the Road", "2022", "R", 89, "Crime, Action, Drama", 4.7);
+
+INSERT INTO popular_netflix VALUES (13, "The Walking Dead", "2010-2022", "TV-MA", 44, "Drama, Horror, Thriller", 8.1);
+
+INSERT INTO popular_netflix VALUES (14, "Glass Onion: A Knives Out Mystery", "2022", "PG-13", 139, "Crime, Drama, Mystery", 8.1);
+
+INSERT INTO popular_netflix VALUES (15, "Do Revenge", "2022", "TV-MA", 118, "Comedy", 6.4);
+
+INSERT INTO popular_netflix VALUES (16, "I Came By", "2022", "TV-MA", 110, "Thriller", 6.1);
+
+INSERT INTO popular_netflix VALUES (17, "No Limit", "2022", "TV-MA", 118, "Drama, Romance, Sport", 5.8);
+
+INSERT INTO popular_netflix VALUES  (18, "1899", "2022-", "TV-MA", 60, "Drama, History, Horror", 9.6);
+
+INSERT INTO popular_netflix VALUES (19, "Peaky Blinders", "2013-2022", "TV-MA", 60, "Crime, Drama", 8.8);
+
+INSERT INTO popular_netflix VALUES (20, "Fate:The Winx Saga", "2021-", "TV-MA", 47, "Action, Adventure, Drama", 6.9);
+
+INSERT INTO popular_netflix VALUES (21, "The Lord of the Rings: The Fellowship of the Ring", "2001", "PG-13", 178, "Action, Adventure, Drama", 8.8);
+
+INSERT INTO popular_netflix VALUES (22, "Grey's Anatomy", "2005-", "TV-14", 41, "Drama, Romance", 7.6);
+
+INSERT INTO popular_netflix VALUES (23, "Supernatural", "2005-2020", "TV-14", 44, "Drama, Fantasy, Horror", 8.4);
+
+INSERT INTO popular_netflix VALUES (24, "American Horror Story", "2011-", "TV-MA", 60, "Drama, Horror, Sci-Fi", 8.0);
+
+INSERT INTO popular_netflix VALUES (25, "The Accidental Narco", "2022-", "TV-MA", 50, "Action, Biography, Crime", 7.4);
+
+INSERT INTO popular_netflix VALUES (26, "NCIS", "2003-", "TV-14", 60, "Action, Crime, Drama", 7.8);
+
+INSERT INTO popular_netflix VALUES (27, "Friends", "1994-2004", "TV-14", 22, "Comedy, Romance", 8.9);
+
+INSERT INTO popular_netflix VALUES (28, "Shameless", "2011-2021", "TV-MA", 46, "Comedy, Drama", 8.6);
+
+INSERT INTO popular_netflix VALUES (29, "Modern Family", "2009-2020", "TV-PG", 22, "Comedy, Drama, Romance", 8.5);
+
+INSERT INTO popular_netflix VALUES (30, "Ozark", "2017-2022", "TV-MA", 60, "Crime, Drama, Thriller", 8.5);
+
+INSERT INTO popular_netflix VALUES (31, "Echoes", "2022", "TV-MA", 326, "Drama, Mystery, Thriller", 5.9);
+
+INSERT INTO popular_netflix VALUES (32, "The Gray Man", "2022", "PG-13", 122, "Action, Thriller", 6.5);
+
+INSERT INTO popular_netflix VALUES (33, "Me Time", "2022", "R", 101, "Comedy", 5.0);
+
+INSERT INTO popular_netflix VALUES (34, "Suits", "2011-2019", "TV-14", 44, "Comedy, Drama", 8.5);
+
+INSERT INTO popular_netflix VALUES (35, "Vikings", "2013-2022", "TV-MA", 44, "Action, Adventure, Drama", 8.5);
+
+INSERT INTO popular_netflix VALUES (36, "The Witcher", "2019-", "TV-MA", 60, "Action, Adventure, Drama", 8.2);
+
+INSERT INTO popular_netflix VALUES (37, "The Blacklist", "2013-", "TV-14", 43, "Crime, Drama, Mystery", 8.0);
+
+INSERT INTO popular_netflix VALUES (38, "Seinfeld", "1989-1998", "TV-PG", 22, "Comedy", 8.9);
+
+INSERT INTO popular_netflix VALUES (39, "Lucifer", "2016-2021", "TV-14", 42, "Crime, Drama, Fantasy", 8.1);
+
+INSERT INTO popular_netflix VALUES (40, "The Umbrella Acadamy", "2019-2023", "TV-14", 60, "Action, Adventure, Comedy", 7.9);
+
+INSERT INTO popular_netflix VALUES (41, "The Last Kingdom","2015-2022", "TV-MA", 60, "Action, Drama, History", 8.5);
+
+INSERT INTO popular_netflix VALUES (42, "Partner Track", "2022-", "TV-MA", 60, "Drama", 6.8);
+
+INSERT INTO popular_netflix VALUES (43, "Love in the Villa", "2022", "TV-14", 114, "Comedy, Romance", 5.3);
+
+INSERT INTO popular_netflix VALUES (44, "Black Mirror", "2011-2019", "TV-MA", 60, "Drama, Mystery, Sci-Fi", 8.8);
+
+INSERT INTO popular_netflix VALUES (45, "Brooklyn Nine-Nine", "2013-2021", "TV-14", 22, "Comedy, Crime", 8.4);
+
+INSERT INTO popular_netflix VALUES (46, "Squid Game", "2021-", "TV-MA", 55, "Action, Mystery, Drama", 8.0);
+
+INSERT INTO popular_netflix VALUES (47, "Gilmore Girls", "2000-2007", "TV-PG", 44, "Comedy, Drama", 8.2);
+
+INSERT INTO popular_netflix VALUES (48, "Outlander", "2014-", "TV-MA", 60, "Drama, Fantasy, Romance", 8.4);
+
+INSERT INTO popular_netflix VALUES (49, "Ófærð", "2015-", "TV-14", 60, "Crime, Drama, Mystery", 8.0);
+
+INSERT INTO popular_netflix VALUES (50, "Never Have I Ever", "2020-", "TV-14", 30, "Comedy, Drama", 7.9);
+
+INSERT INTO popular_netflix VALUES (51, "Attack on Titan", "2013-", "TV-MA", 24, "Animation, Action, Adventure", 8.0);
+
+INSERT INTO popular_netflix VALUES (52, "Manifest", "2018-", "TV-14", 43, "Drama, Mystery, Sci-Fi", 7.1);
+
+INSERT INTO popular_netflix VALUES (53, "Locke & Key", "2020-2022", "TV-14", 48, "Drama, Fantasy, Horror", 7.3); 
+
+INSERT INTO popular_netflix VALUES (54, "Day Shift", "2022", "R", 113, "Action, Comedy, Fantasy", 6.1);
+
+INSERT INTO popular_netflix VALUES (55, "Dark", "2017-2020", "TV-MA", 60, "Crime, Drama, Mystery", 8.7);
+
+INSERT INTO popular_netflix VALUES (56, "Sex Education", "2019-", "TV-MA", 45, "Comedy, Drama", 8.4);
+
+INSERT INTO popular_netflix VALUES (57, "The Lord of the Rings: The Return of the King", "2003", "PG-13", 201, "Action, Adventure, Drama", 9.0);
+
+INSERT INTO popular_netflix VALUES (58, "The Vampire Diaries", "2009-2017", "TV-14", 43, "Drama, Fantasy, Horror", 7.7);
+
+INSERT INTO popular_netflix VALUES (59, "Virgin River", "2019-", "TV-14", 44, "Drama, Romance", 7.4);
+
+INSERT INTO popular_netflix VALUES (60, "Family Guy", "1999-", "TV-MA", 22, "Animation, Comedy", 8.2);
+
+INSERT INTO popular_netflix VALUES (61, "Fargo", "2014-", "TV-MA", 53, "Crime, Drama, Thriller", 8.9);
+
+INSERT INTO popular_netflix VALUES (62, "Animal Kingdom", "2016-2022", "TV-MA", 60, "Crime, Drama", 8.2);
+
+INSERT INTO popular_netflix VALUES (63, "Diario de un Gigoló", "2022", "TV-MA", 50, "Drama", 6.3); 
+
+INSERT INTO popular_netflix VALUES (64, "How I Met Your Mother", "2005-2014", "TV-14", 22, "Romance, Comedy", 8.3);
+
+INSERT INTO popular_netflix VALUES (65, "The School for Good and Evil", "2022", "PG-13", 147, "Action, Drama, Fantasy", 4.5);
+
+INSERT INTO popular_netflix VALUES (66, "Heartbreak High", "2022-", "TV-MA", 50, "Drama, Romance", 7.6);
+
+INSERT INTO popular_netflix VALUES (67, "Community", "2009-2015", "TV-14", 22, "Comedy", 8.5);
+
+INSERT INTO popular_netflix VALUES (68, "Daredevil", "2015-2018", "TV-MA", 54, "Action, Crime, Drama", 8.6);
+
+INSERT INTO popular_netflix VALUES (69, "Blue Bloods", "2010-", "TV-14", 43, "Crime, Drama, Mystery", 7.7);
+
+INSERT INTO popular_netflix VALUES (70, "Bee and PuppyCat", "2013-", "TV-PG", 7, "Action, Animation, Short", 8.2);
+
+INSERT INTO popular_netflix VALUES (71, "Loving Adults", "2022", "TV-MA", 104, "Crime, Drama, Thriller", 8.5);
+
+INSERT INTO popular_netflix VALUES (72, "Schitt's Creek", "2015-2020", "TV-14", 22, "Comedy", 8.5);
+
+INSERT INTO popular_netflix VALUES (73, "Sing 2", "2021", "PG", 110, "Animation, Adventure, Comedy", 7.4);
+
+INSERT INTO popular_netflix VALUES (74, "RRR", "2022", "NR", 187, "Action, Drama", 8.0); 
+
+INSERT INTO popular_netflix VALUES (75, "Arcane", "2021-", "TV-14", 41, "Animation, Action, Adventure", 9.0);
+
+INSERT INTO popular_netflix VALUES (76, "The Lord of the Rings: The Two Towers", "2002", "PG-13", 179, "Action, Adventure, Drama", 8.8);
+
+INSERT INTO popular_netflix VALUES (77, "All Quiet on the Western Front", "2022", "R", 147, "Action, Drama, War", 8.4);
+
+INSERT INTO popular_netflix VALUES (78, "Mr. Harrigan's Phone", "2022", "PG-13", 104, "Horror", 6.0);
+
+INSERT INTO popular_netflix VALUES (79, "American Psycho", "2000", "R", 102, "Crime, Drama, Horror", 7.6);
+
+INSERT INTO popular_netflix VALUES (80, "The Hobbit: An Unexpected Journey", "2012", "PG-13" , 169, "Adventure, Fantasy", 7.8); 
+
+INSERT INTO popular_netflix VALUES (81, "Kleo", "2022-", "TV-MA", 44, "Action, Crime, Drama", 7.5);
+
+INSERT INTO popular_netflix VALUES (82, "Riverdale", "2017-", "TV-14", 45, "Crime, Drama, Mystery", 6.6);
+
+INSERT INTO popular_netflix VALUES (83, "Sons of Anarchy", "2008-2014", "TV-MA", 45, "Crime, Drama, Thriller", 8.6);
+
+INSERT INTO popular_netflix VALUES (84, "Mad Men", "2007-2015", "TV-14", 47, "Drama", 8.7);
+
+INSERT INTO popular_netflix VALUES (85, "The Flash", "2014-", "TV-PG", 43, "Action, Adventure, Drama", 7.6);
+
+INSERT INTO popular_netflix VALUES (86, "Archer", "2009-", "TV-MA", 22, "Animation, Action, Comedy", 8.6);
+
+INSERT INTO popular_netflix VALUES (87, "Dahmer - Monster: The Jeffrey Dahmer Story", "2022", "TV-MA", 534, "Biography, Crime, Drama", 8.5);
+
+INSERT INTO popular_netflix VALUES (88, "Mr. Robot", "2015-2019", "TV-MA", 49, "Crime, Drama, Thriller", 8.6);
+
+INSERT INTO popular_netflix VALUES (89, "That 70's Show", "1998-2006", "TV-14", 22, "Comedy, Drama, Romance", 8.1);
+
+INSERT INTO popular_netflix VALUES (90, "You", "2019-", "TV-MA", 45, "Crime, Drama, Romance", 7.7);
+
+INSERT INTO popular_netflix VALUES (91, "Look Both Ways", "2022", "TV-14", 110, "Comedy, Drama, Romance", 6.3);
+
+INSERT INTO popular_netflix VALUES (92, "365 Days", "2020", "TV-MA", 114, "Drama, Romance", 3.3);
+
+INSERT INTO popular_netflix VALUES (93, "I Used To Be Famous", "2022", "TV-14", 104, "Comedy, Drama, Music", 6.6);
+
+INSERT INTO popular_netflix VALUES (94, "Titanic", "1997", "PG-13", 194, "Drama, Romance", 7.9);
+
+INSERT INTO popular_netflix VALUES (95, "Bridgerton", "2020-", "TV-MA", 60, "Drama, History, Romance", 7.3);
+
+INSERT INTO popular_netflix VALUES (96, "Sherlock", "2010-2017", "TV-14", 88, "Crime, Drama, Mystery", 9.1);
+
+INSERT INTO popular_netflix VALUES (97, "Dexter", "2006-2013", "TV-MA", 53, "Crime, Drama, Mystery", 8.7);
+
+INSERT INTO popular_netflix VALUES (98, "New Girl", "2011-2018", "TV-14", 22, "Comedy, Romance", 7.7);
+
+INSERT INTO popular_netflix VALUES (99, "The Expanse", "2015-2022", "TV-14", 60, "Drama, Mystery, Sci-Fi", 8.5);
+
+INSERT INTO popular_netflix VALUES (100, "Inventing Anna", "2022", "TV-MA", 65, "Drama", 6.8);
+
+INSERT INTO popular_netflix VALUES (101, "Purple Hearts", "2022", "TV-14", 122, "Drama, Music, Romance", 6.7);
+
+INSERT INTO popular_netflix VALUES (102, "The Gentleman", "2019", "R", 113, "Action, Comedy, Crime", 7.8);
+
+INSERT INTO popular_netflix VALUES (103, "The Good Doctor", "2017-", "TV-14", 41, "Drama", 8.1);
+
+INSERT INTO popular_netflix VALUES (104, "Downtown Abbey", "2010-2015", "TV-PG", 58, "Drama, Romance", 8.7);
+
+INSERT INTO popular_netflix VALUES (105, "Extrordinary Attorney Woo", "2022", "TV-14", 75, "Drama", 8.9);
+
+INSERT INTO popular_netflix VALUES (106, "Smallville", "2001-2017", "TV-PG", 60, "Action, Adventure, Drama", 7.5);
+
+INSERT INTO popular_netflix VALUES (107, "Star Trek: The Next Generation", "1987-1994", "TV-PG", 44, "Action, Adventure, Sci-Fi", 8.7);
+
+INSERT INTO popular_netflix VALUES (108, "BoJack Horseman", "2014-2020", "TV-MA", 25, "Animation, Comedy, Drama", 8.8);
+
+INSERT INTO popular_netflix VALUES (109, "Love, Death, & Robots", "2019-", "TV-MA", 15, "Animation, Action, Short", 8.4);
+
+INSERT INTO popular_netflix VALUES (110, "Money Heist", "2017-2021", "TV-MA", 70, "Action, Crime, Drama", 8.2);
+
+INSERT INTO popular_netflix VALUES (111, "Orange is the New Black", "2013-2019", "TV-MA", 59, "Comedy, Crime, Drama", 8.1);
+
+INSERT INTO popular_netflix VALUES (112, "Jurassic Park", "1993", "PG-13", 127, "Action, Adventure, Sci-Fi", 8.2);
+
+INSERT INTO popular_netflix VALUES (113, "Prison Break", "2005-2017", "TV-14", 44, "Action, Crime, Drama", 8.3);
+
+INSERT INTO popular_netflix VALUES (114, "Billion", "2016-", "TV-MA", 60, "Drama", 8.4);
+
+INSERT INTO popular_netflix VALUES (115, "Once Upon a Time", "2011-2018", "TV-PG", 60, "Adventure, Fantasy, Romance", 7.7);
+
+INSERT INTO popular_netflix VALUES (116, "Titans", "2018-", "TV-MA", 45, "Action, Adventure, Crime", 7.6);
+
+INSERT INTO popular_netflix VALUES (117, "The 100", "2014-2020", "TV-14", 43, "Drama, Mystery, Sci-Fi", 7.6);
+
+INSERT INTO popular_netflix VALUES (118, "Jaws", "1975", "PG", 124, "Adventure, Thriller", 8.1);
+
+INSERT INTO popular_netflix VALUES (119, "The Catholic School", "2021", "TV-MA", 106, "Drama", 5.8);
+
+INSERT INTO popular_netflix VALUES (120, "Spartacus", "2010-2013", "TV-MA", 55, "Action, Adventure, Biography", 8.5);
+
+INSERT INTO popular_netflix VALUES (121, "Clueless", "1995", "PG-13", 97, "Comedy, Romance", 6.9);
+
+INSERT INTO popular_netflix VALUES (122, "Chesapeake Shores", "2016-2022", "TV-PG", 42, "Drama, Family", 7.5);
+
+INSERT INTO popular_netflix VALUES (123, "Demon Slayer: Kimetsu no Yaiba", "2019", "TV-MA", 24, "Animation, Action, Adventure", 8.7);
+
+INSERT INTO popular_netflix VALUES (124, "The Queen's Gambit", "2020", "TV-MA", 60, "Drama", 8.6);
+
+INSERT INTO popular_netflix VALUES (125, "Pretty Little Liar's", "2010-2017", "TV-14", 44, "Drama, Mystery, Romance", 7.4);
+
+INSERT INTO popular_netflix VALUES (126, "Mindhunter", "2017-2019", "TV-MA", 60, "Crime, Drama, Mystery", 8.6);
+
+INSERT INTO popular_netflix VALUES (127, "Murder, She Wrote", "1984-1996", "TV-PG", 50, "Crime, Drama, Mystery", 7.4);
+
+INSERT INTO popular_netflix VALUES (128, "From", "2022-", "TV-MA", 52, "Drama, Horror, Mystery", 7.6);
+
+INSERT INTO popular_netflix VALUES (129, "Spiderhead", "2022", "R", 106, "Action, Crime, Drama", 5.4);
+
+INSERT INTO popular_netflix VALUES (130, "CSI: Crime Scene Investigation", "2000-2015", "TV-14", 60, "Crime, Drama, Mystery", 7.7);
+
+INSERT INTO popular_netflix VALUES (131, "Evil", "2019-","TV-14", 42, "Crime, Drama, Horror", 7.7);
+
+INSERT INTO popular_netflix VALUES (132, "The Lincoln Lawyer", "2022-", "TV-MA", 60, "Crime, Drama, Mystery", 7.7);
+
+INSERT INTO popular_netflix VALUES (133, "Arrested Development", "2003-2019", "TV-14", 22, "Comedy", 8.7);
+
+INSERT INTO popular_netflix VALUES (134, "Heartland", "2007-", "TV-PG", 45, "Drama, Family", 8.4);
+
+INSERT INTO popular_netflix VALUES (135, "Mo", "2022-", "TV-MA", 30, "Comedy, Drama", 7.6); 
+
+INSERT INTO popular_netflix VALUES (136, "IT", "2017", "R", 135, "Horror", 7.3);
+
+INSERT INTO popular_netflix VALUES (137, "Narcos", "2015-2017", "TV-MA", 49, "Biography, Crime, Drama", 8.8);
+
+INSERT INTO popular_netflix VALUES (138, "The Sinner", "2017-2021", "TV-MA", 45, "Crime, Drama, Mystery", 7.9);
+
+INSERT INTO popular_netflix VALUES (139, "Homeland", "2011-2020", "TV-MA", 55, "Crime, Drama, Mystery", 8.3);
+
+INSERT INTO popular_netflix VALUES (140, "The Haunting of Hill House", "2018", "TV-MA", 572, "Drama, Horror, Mystery", 8.6);
+
+INSERT INTO popular_netflix VALUES (141, "Doc Martin", "2004-2022", "TV-14", 46, "Comedy, Drama, Romance", 8.4);
+
+INSERT INTO popular_netflix VALUES (142, "Hawaii Five-0", "2010-2020", "TV-14", 42, "Action, Crime, Drama", 7.4);
+
+INSERT INTO popular_netflix VALUES (143, "Star Trek: The Orginal Series", "1966-1969", "TV-PG", 50, "Action, Adventure, Sci-Fi", 8.4);
+
+INSERT INTO popular_netflix VALUES (144, "The Next 365 Days", "2022", "TV-MA", 112, "Drama, Romance", 2.7);
+
+INSERT INTO popular_netflix VALUES (145, "Don't Look Up", "2021", "R", 138, "Comedy, Drama, Sci-Fi", 7.2);
+
+INSERT INTO popular_netflix VALUES (146, "Murdoch Mysteries", "2008-", "TV-PG", 48, "Crime, Drama, Mystery", 8.2);
+
+INSERT INTO popular_netflix VALUES (147, "The Good Wife", "2009-2016", "TV-14", 43, "Crime, Drama, Mystery", 8.4);
+
+INSERT INTO popular_netflix VALUES (148, "Shadow and Bone", "2021-", "TV-14", 60, "Action, Adventure, Drama", 7.6);
+
+INSERT INTO popular_netflix VALUES (149, "Sex/Life", "2021-", "TV-MA", 45, "Comedy, Drama, Romance", 5.4);
+
+INSERT INTO popular_netflix VALUES (150, "Gladiator", "2000", "R", 155, "Action, Adventure, Drama", 8.5);
+
+INSERT INTO popular_netflix VALUES (151, "The Punisher", "2017-2019", "TV-MA", 53, "Action, Crime, Drama", 8.5);
+
+INSERT INTO popular_netflix VALUES (152, "Midnight Mass", "2021", "TV-MA", 450, "Drama, Fantasy, Horror", 7.7);
+
+INSERT INTO popular_netflix VALUES (153, "Roswell, New Mexico", "2019-2022", "TV-14", 45, "Drama, Romance, Sci-Fi", 6.2);
+
+INSERT INTO popular_netflix VALUES (154, "Taxi Driver", "1976", "R", 114, "Crime, Drama", 8.2); 
+
+INSERT INTO popular_netflix VALUES (155, "Teen Wolf", "2011-2017", "TV-14", 41, "Action, Drama, Fantasy", 7.7);
+
+INSERT INTO popular_netflix VALUES (156, "Vikings: Valhalla", "2022-", "TV-MA", 51, "Action, Adventure, Drama", 7.2);
+
+INSERT INTO popular_netflix VALUES (157, "New Amsterdam", "2018-", "TV-14", 43, "Drama", 8.0);
+
+INSERT INTO popular_netflix VALUES (158, "Léon: The Professional", "1994", "R", 110, "Action, Crime, Drama", 8.5);
+
+INSERT INTO popular_netflix VALUES (159, "Arrow", "2012-2020", "TV-14", 42, "Action, Adventure, Crime", 7.5);
+
+INSERT INTO popular_netflix VALUES  (160, "The Good Nurse", "2022", "R", 121, "Biography, Crime, Drama", 7.8);
+
+INSERT INTO popular_netflix VALUES  (161, "The Good Place", "2016-2020", "TV-PG", 22, "Comedy, Drama, Fantasy", 8.2);
+
+INSERT INTO popular_netflix VALUES  (162, "Agents of S.H.I.E.L.D.", "2013-2020", "TV-PG", 45, "Action, Adventure, Drama", 7.5);
+
+INSERT INTO popular_netflix VALUES (163, "Mother!", "2017", "R", 121, "Drama, Mystery, Horror", 6.6);
+
+INSERT INTO popular_netflix VALUES  (164, "Hustle", "2022", "R", 117, "Comedy, Drama, Sport", 7.3);
+
+INSERT INTO popular_netflix VALUES (165, "365 Days: This Day", "2022", "TV-MA", 111, "Drama, Romance", 2.6); 
+
+INSERT INTO popular_netflix VALUES (166, "Cheers", "1983-1993", "TV-PG", 22, "Comedy, Drama", 7.9);
+
+INSERT INTO popular_netflix VALUES (167, "Line of Duty", "2012-2021", "TV-14", 60, "Crime, Drama, Mystery", 8.7);
+
+INSERT INTO popular_netflix VALUES (168, "Pieces of Her", "2022-", "TV-MA", 52, "Crime, Drama, Mystery", 6.3);
+
+INSERT INTO popular_netflix VALUES (169, "The Departed", "2006", "R", 151, "Crime, Drama, Thriller", 8.5);
+
+SELECT * FROM popular_netflix;
+
+SELECT rating, AVG(rating) AS average_rating 
+FROM popular_netflix;
+
+SELECT duration_minutes, AVG(duration_minutes) AS average_duration
+FROM popular_netflix;
+
+SELECT rating,title, MAX(rating) AS max_rating
+FROM popular_netflix;
+SELECT rating, title, MIN(rating) AS min_rating
+FROM popular_netflix;
+
+SELECT rating, title FROM popular_netflix
+WHERE rating >=7
+GROUP BY rating;
+
+SELECT rating, title FROM popular_netflix
+WHERE rating >=7 AND duration_minutes>30
+GROUP BY rating;
+
+SELECT rating, title FROM popular_netflix
+WHERE rating >=7 AND duration_minutes>30 OR genre="horror,thriller"
+GROUP BY rating;
+
+
