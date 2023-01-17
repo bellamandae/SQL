@@ -188,15 +188,67 @@ mysql> Select * FROM Customers;
 |         10 | Molly     | Vincent   | 6209 Mission St       | Omaha         | Nebraska     |   68127 | 519-452-8601 |
 +------------+-----------+-----------+-----------------------+---------------+--------------+---------+--------------+
 10 rows in set (0.00 sec)
-mysql>CREATE VIEW Collaborator AS SELECT CustomerID AS CollaboratorID FROM Customers;
 
-mysql> show tables;
-+----------------------------+
-| Tables_in_QuantigrationRMA |
-+----------------------------+
-| Collaborator               |
-| Customers                  |
-| Orders                     |
-| RMA                        |
-+----------------------------+
-4 rows in set (0.00 sec)
+mysql> CREATE VIEW Collaborator AS 
+    -> SELECT CustomerID AS CollaboratorID,
+    -> FirstName,
+    -> LastName,
+    -> Street,
+    -> City,
+    -> State,
+    -> ZipCode,
+    -> Telephone
+    -> FROM Customers;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DESCRIBE Collaborator;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| CollaboratorID | int(11)     | NO   |     | 0       |       |
+| FirstName      | varchar(25) | YES  |     | NULL    |       |
+| LastName       | varchar(25) | YES  |     | NULL    |       |
+| Street         | varchar(50) | YES  |     | NULL    |       |
+| City           | varchar(50) | YES  |     | NULL    |       |
+| State          | varchar(25) | YES  |     | NULL    |       |
+| ZipCode        | int(11)     | YES  |     | NULL    |       |
+| Telephone      | varchar(15) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Collaborator 
+    -> LIMIT 5;
++----------------+-----------+-----------+----------------------+----------+-------------+---------+--------------+
+| CollaboratorID | FirstName | LastName  | Street               | City     | State       | ZipCode | Telephone    |
++----------------+-----------+-----------+----------------------+----------+-------------+---------+--------------+
+|              1 | Alex      | Fry       | 345 Alice Court      | Houston  | Texas       |   77080 | 921-532-8894 |
+|              2 | Kimberly  | Sternhoff | 9723 Bowling Dr      | Plano    | Texas       |   75023 | 212-634-5587 |
+|              3 | Peter     | Hauser    | 1293 Sterling Ln     | Boise    | Idaho       |   83701 | 842-971-0098 |
+|              4 | William   | Overdorff | 4322 Neon Springs Dr | Alford   | Florida     |   32420 | 442-871-7736 |
+|              5 | Katelyn   | Malcolm   | 821 Valley St        | Gulfport | Mississippi |   39503 | 612-832-0099 |
++----------------+-----------+-----------+----------------------+----------+-------------+---------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> describe Orders;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| OrderID     | int(11)     | NO   | PRI | 0       |       |
+| SKU         | varchar(20) | YES  |     | NULL    |       |
+| Description | varchar(50) | YES  |     | NULL    |       |
+| CustomerID  | int(11)     | YES  | MUL | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> describe RMA;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| RMAID   | int(11)     | NO   | PRI | 0       |       |
+| OrderID | int(11)     | YES  | MUL | NULL    |       |
+| Step    | varchar(50) | YES  |     | NULL    |       |
+| Status  | varchar(15) | YES  |     | NULL    |       |
+| Reason  | varchar(15) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
