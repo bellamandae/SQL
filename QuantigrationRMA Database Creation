@@ -1,0 +1,190 @@
+CREATE DATABASE QuantigrationRMA;
+show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| QuantigrationRMA   |
+| bell_am            |
+| mysql              |
+| performance_schema |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use QuantigrationRMA;
+Database changed
+mysql> CREATE TABLE Customers 
+    -> (CustomerID INT, 
+    -> FirstName VARCHAR(25),
+    -> LastName VARCHAR(25),
+    -> Street VARCHAR(50),
+    -> City VARCHAR(50),
+    -> State VARCHAR(25),
+    -> ZipCode INT,
+    -> Telephone VARCHAR(15));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> show tables;
++----------------------------+
+| Tables_in_QuantigrationRMA |
++----------------------------+
+| Customers                  |
++----------------------------+
+1 row in set (0.00 sec)
+
+mysql> describe Customers;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| CustomerID | int(11)     | YES  |     | NULL    |       |
+| FirstName  | varchar(25) | YES  |     | NULL    |       |
+| LastName   | varchar(25) | YES  |     | NULL    |       |
+| Street     | varchar(50) | YES  |     | NULL    |       |
+| City       | varchar(50) | YES  |     | NULL    |       |
+| State      | varchar(25) | YES  |     | NULL    |       |
+| ZipCode    | int(11)     | YES  |     | NULL    |       |
+| Telephone  | varchar(15) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Orders
+    -> (OrderID INT,
+    -> SKU VARCHAR(20),
+    -> Description VARCHAR(50));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> show tables;
++----------------------------+
+| Tables_in_QuantigrationRMA |
++----------------------------+
+| Customers                  |
+| Orders                     |
++----------------------------+
+2 rows in set (0.00 sec)
+
+mysql> describe Orders;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| OrderID     | int(11)     | YES  |     | NULL    |       |
+| SKU         | varchar(20) | YES  |     | NULL    |       |
+| Description | varchar(50) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+mysql> CREATE TABLE RMA
+    -> (RMAID INT,
+    -> OrderID INT,
+    -> Step VARCHAR(50),
+    -> Status VARCHAR(15),
+    -> Reason VARCHAR(15));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> show tables;
++----------------------------+
+| Tables_in_QuantigrationRMA |
++----------------------------+
+| Customers                  |
+| Orders                     |
+| RMA                        |
++----------------------------+
+3 rows in set (0.00 sec)
+
+mysql> describe RMA;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| RMAID   | int(11)     | YES  |     | NULL    |       |
+| OrderID | int(11)     | YES  |     | NULL    |       |
+| Step    | varchar(50) | YES  |     | NULL    |       |
+| Status  | varchar(15) | YES  |     | NULL    |       |
+| Reason  | varchar(15) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+mysql> ALTER TABLE Orders 
+    -> ADD CustomerID INT;
+Query OK, 0 rows affected (0.20 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Customers
+    -> ADD PRIMARY KEY (CustomerID);
+Query OK, 0 rows affected (0.20 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe Orders;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| OrderID     | int(11)     | NO   | PRI | 0       |       |
+| SKU         | varchar(20) | YES  |     | NULL    |       |
+| Description | varchar(50) | YES  |     | NULL    |       |
+| CustomerID  | int(11)     | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Orders
+    -> ADD FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID);
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> Describe Orders;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| OrderID     | int(11)     | NO   | PRI | 0       |       |
+| SKU         | varchar(20) | YES  |     | NULL    |       |
+| Description | varchar(50) | YES  |     | NULL    |       |
+| CustomerID  | int(11)     | YES  | MUL | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> ALTER TABLE RMA
+    -> ADD PRIMARY KEY (RMAID);
+Query OK, 0 rows affected (0.23 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE RMA
+    -> ADD FOREIGN KEY (OrderID) REFERENCES Orders (OrderID);
+Query OK, 0 rows affected (0.19 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe RMA;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| RMAID   | int(11)     | NO   | PRI | 0       |       |
+| OrderID | int(11)     | YES  | MUL | NULL    |       |
+| Step    | varchar(50) | YES  |     | NULL    |       |
+| Status  | varchar(15) | YES  |     | NULL    |       |
+| Reason  | varchar(15) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+mysql> INSERT INTO Customers VALUES
+    -> (001, 'Alex', 'Fry', '345 Alice Court', 'Houston', 'Texas', 77080, '921-532-8894'),
+    -> (002, 'Kimberly', 'Sternhoff', '9723 Bowling Dr', 'Plano', 'Texas', 75023, '212-634-5587'),
+    -> (003, 'Peter', 'Hauser', '1293 Sterling Ln', 'Boise', 'Idaho', 83701, '842-971-0098'),
+    -> (004, 'William', 'Overdorff', '4322 Neon Springs Dr', 'Alford', 'Florida', 32420, '442-871-7736'),
+    -> (005, 'Katelyn', 'Malcolm', '821 Valley St', 'Gulfport', 'Mississippi', 39503, '612-832-0099'),
+    -> (006, 'Grace', 'Peck', '7743 Alexander Ave', 'Pittsburgh', 'Pennsylvania', 15136, '412-643-5218'),
+    -> (007, 'Cindy', 'Lui', '96 Crest Court', 'Bowling Green', 'Kentucky', 55648, '212-749-2387'),
+    -> (008, 'Bruce', 'Miller', '8790 High Point Ln', 'Charleroi', 'Pennsylvania', 15022, '412-902-3441'),
+    -> (009, 'Neil', 'Patterson', '12 Apple Tree Orchard', 'Belfast', 'Maine', 04915, '732-3957521'),
+    -> (010, 'Molly', 'Vincent', '6209 Mission St', 'Omaha', 'Nebraska', 68127, '519-452-8601');
+Query OK, 10 rows affected (0.02 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> Select * FROM Customers;
++------------+-----------+-----------+-----------------------+---------------+--------------+---------+--------------+
+| CustomerID | FirstName | LastName  | Street                | City          | State        | ZipCode | Telephone    |
++------------+-----------+-----------+-----------------------+---------------+--------------+---------+--------------+
+|          1 | Alex      | Fry       | 345 Alice Court       | Houston       | Texas        |   77080 | 921-532-8894 |
+|          2 | Kimberly  | Sternhoff | 9723 Bowling Dr       | Plano         | Texas        |   75023 | 212-634-5587 |
+|          3 | Peter     | Hauser    | 1293 Sterling Ln      | Boise         | Idaho        |   83701 | 842-971-0098 |
+|          4 | William   | Overdorff | 4322 Neon Springs Dr  | Alford        | Florida      |   32420 | 442-871-7736 |
+|          5 | Katelyn   | Malcolm   | 821 Valley St         | Gulfport      | Mississippi  |   39503 | 612-832-0099 |
+|          6 | Grace     | Peck      | 7743 Alexander Ave    | Pittsburgh    | Pennsylvania |   15136 | 412-643-5218 |
+|          7 | Cindy     | Lui       | 96 Crest Court        | Bowling Green | Kentucky     |   55648 | 212-749-2387 |
+|          8 | Bruce     | Miller    | 8790 High Point Ln    | Charleroi     | Pennsylvania |   15022 | 412-902-3441 |
+|          9 | Neil      | Patterson | 12 Apple Tree Orchard | Belfast       | Maine        |    4915 | 732-3957521  |
+|         10 | Molly     | Vincent   | 6209 Mission St       | Omaha         | Nebraska     |   68127 | 519-452-8601 |
++------------+-----------+-----------+-----------------------+---------------+--------------+---------+--------------+
+10 rows in set (0.00 sec)
