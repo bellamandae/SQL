@@ -1,14 +1,6 @@
 CREATE DATABASE QuantigrationRMA;
 show databases;
 +--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| QuantigrationRMA   |
-| bell_am            |
-| mysql              |
-| performance_schema |
-+--------------------+
 5 rows in set (0.00 sec)
 
 mysql> use QuantigrationRMA;
@@ -100,13 +92,19 @@ mysql> describe RMA;
 | Reason  | varchar(15) | YES  |     | NULL    |       |
 +---------+-------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
+
+# add CustomerID to be set as FK to Orders table with INT definition
+
 mysql> ALTER TABLE Orders 
     -> ADD CustomerID INT;
+    
 Query OK, 0 rows affected (0.20 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
+
 mysql> ALTER TABLE Customers
     -> ADD PRIMARY KEY (CustomerID);
+    
 Query OK, 0 rows affected (0.20 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
@@ -189,6 +187,8 @@ mysql> Select * FROM Customers;
 +------------+-----------+-----------+-----------------------+---------------+--------------+---------+--------------+
 10 rows in set (0.00 sec)
 
+# request for collaborator view of customer table w/ customer to be returned as collaborator 
+
 mysql> CREATE VIEW Collaborator AS 
     -> SELECT CustomerID AS CollaboratorID,
     -> FirstName,
@@ -215,6 +215,8 @@ mysql> DESCRIBE Collaborator;
 | Telephone      | varchar(15) | YES  |     | NULL    |       |
 +----------------+-------------+------+-----+---------+-------+
 8 rows in set (0.00 sec)
+
+# Run select query to ensure collaborator table view successful 
 
 mysql> SELECT * FROM Collaborator 
     -> LIMIT 5;
@@ -251,4 +253,47 @@ mysql> describe RMA;
 | Reason  | varchar(15) | YES  |     | NULL    |       |
 +---------+-------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
+
+mysql> show tables;
++----------------------------+
+| Tables_in_QuantigrationRMA |
++----------------------------+
+| Collaborator               |
+| Customers                  |
+| Orders                     |
+| RMA                        |
++----------------------------+
+4 rows in set (0.00 sec)
+
+mysql> #load csv files into corresponding tables
+mysql> 
+mysql> LOAD DATA INFILE 'customers.csv'
+    -> INTO TABLE Customers
+    -> FIELDS TERMINATED BY ',';
+
+mysql> LOAD DATA INFILE 'orders.csv'
+    -> INTO TABLE Orders
+    -> FIELDS TERMINATED BY ',';
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`QuantigrationRMA`.`Orders`, CONSTRAINT `Orders_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `Customers` (`CustomerID`))
+mysql> 
+mysql> # disable foreign key checks temporarily, will turn back on after upload of csvs 
+mysql> 
+mysql> set foreign_key_checks = 0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> LOAD DATA INFILE 'orders.csv' INTO TABLE Orders FIELDS TERMINATED BY ',';
+Query OK, 37994 rows affected, 37994 warnings (0.36 sec)
+Records: 37994  Deleted: 0  Skipped: 0  Warnings: 37994
+
+mysql> LOAD DATA INFILE 'rma.csv' 
+    -> INTO TABLE RMA
+    -> FIELDS TERMINATED BY ',';
+Query OK, 38162 rows affected (0.43 sec)
+Records: 38162  Deleted: 0  Skipped: 0  Warnings: 0
+
+mysql> #return FK check to on 
+
+mysql> set foreign_key_checks = 1;
+Query OK, 0 rows affected (0.00 sec)
+
 
