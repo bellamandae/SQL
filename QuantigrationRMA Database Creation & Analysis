@@ -265,23 +265,17 @@ mysql> show tables;
 +----------------------------+
 4 rows in set (0.00 sec)
 
-mysql> #load csv files into corresponding tables
-mysql> 
+#load csv files into corresponding tables
+
 mysql> LOAD DATA INFILE 'customers.csv'
     -> INTO TABLE Customers
     -> FIELDS TERMINATED BY ',';
+Query OK, 38162 rows affected (0.43 sec)
+Records: 38162  Deleted: 0  Skipped: 0  Warnings: 0
 
 mysql> LOAD DATA INFILE 'orders.csv'
     -> INTO TABLE Orders
     -> FIELDS TERMINATED BY ',';
-ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`QuantigrationRMA`.`Orders`, CONSTRAINT `Orders_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `Customers` (`CustomerID`))
-mysql> 
-mysql> # disable foreign key checks temporarily, will turn back on after upload of csvs 
-mysql> 
-mysql> set foreign_key_checks = 0;
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> LOAD DATA INFILE 'orders.csv' INTO TABLE Orders FIELDS TERMINATED BY ',';
 Query OK, 37994 rows affected, 37994 warnings (0.36 sec)
 Records: 37994  Deleted: 0  Skipped: 0  Warnings: 37994
 
@@ -291,9 +285,115 @@ mysql> LOAD DATA INFILE 'rma.csv'
 Query OK, 38162 rows affected (0.43 sec)
 Records: 38162  Deleted: 0  Skipped: 0  Warnings: 0
 
-mysql> #return FK check to on 
+# update Customer and Orders tables with new records 
 
-mysql> set foreign_key_checks = 1;
-Query OK, 0 rows affected (0.00 sec)
+describe Customers;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| CustomerID | int(11)     | NO   | PRI | 0       |       |
+| FirstName  | varchar(25) | YES  |     | NULL    |       |
+| LastName   | varchar(25) | YES  |     | NULL    |       |
+| Street     | varchar(50) | YES  |     | NULL    |       |
+| City       | varchar(50) | YES  |     | NULL    |       |
+| State      | varchar(25) | YES  |     | NULL    |       |
+| ZipCode    | int(11)     | YES  |     | NULL    |       |
+| Telephone  | varchar(15) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> INSERT INTO Customers VALUES 
+    -> (100004, 'Luke', 'Skywalker', '17 Maiden Lane', 'New York', 'NY', 10222, '212-555-1234'),
+    -> (100005, 'Winston', 'Smith', '128 Sycamore Street', 'Greensboro', 'NC', 27401, '919-555-6623'),
+    -> (100006, 'MaryAnne', 'Jenkins', '2 Coconut Way', 'Jupiter', 'FL', 33458, '321-555-8907'),
+    -> (100007, 'Janet', 'Williams', '58 Redondo Beach Blvd', 'Torrence', 'CA', 90501, '310-555-5678');
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+describe Orders;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| OrderID     | int(11)     | NO   | PRI | 0       |       |
+| CustomerID  | int(11)     | YES  | MUL | NULL    |       |
+| SKU         | varchar(20) | YES  |     | NULL    |       |
+| DESCRIPTION | varchar(50) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO Orders VALUES
+    -> (1204305, 100004, 'ADV-24-10C', 'Advanced Switch 10GigE Copper 24 port'),
+    -> (1204306, 100005, 'ADV-48-10F', 'Advanced Switch 10 GigE Copper/Fiber 44 port copper 4 port fiber'),
+    -> (1204307, 100006, 'ENT-24-10F', 'Enterprise Switch 10GigE SFP+ 24 Port'),
+    -> (1204308, 100007, 'ENT-48-10F', 'Enterprise Switch 10GigE SFP+ 48 port');
+Query OK, 4 rows affected, 1 warning (0.03 sec)
+Records: 4  Duplicates: 0  Warnings: 1
+
+# update the status and step for the OrderID, 5175 to status = “Complete” and step = “Credit Customer Account.” 
+
+describe RMA;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| RMAID   | int(11)     | NO   | PRI | 0       |       |
+| OrderID | int(11)     | YES  | MUL | NULL    |       |
+| Step    | varchar(50) | YES  |     | NULL    |       |
+| Status  | varchar(15) | YES  |     | NULL    |       |
+| Reason  | varchar(15) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+# checked current status and step of OrderID 5175 prior to updating record 
+
+mysql> SELECT Status, Step FROM RMA
+    -> WHERE OrderID = 5175;
++---------+---------------------------------+
+| Status  | Step                            |
++---------+---------------------------------+
+| Pending | Awaiting customer Documentation |
++---------+---------------------------------+
+
+mysql> #update OrderID 5175 status = “Complete” and step = “Credit Customer Account" in RMA table 
+ 
+mysql> UPDATE RMA SET Status = 'Complete', Step = 'Credit Customer Account'
+    -> WHERE OrderID = 5175;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+#confirmed OrderID 5175 status and step updated in RMA table
+
+mysql> SELECT * FROM RMA 
+    -> WHERE OrderID = 5175;
++-------+---------+-------------------------+----------+-----------+
+| RMAID | OrderID | Step                    | Status   | Reason    |
++-------+---------+-------------------------+----------+-----------+
+| 31405 |    5175 | Credit Customer Account | Complete | Defective |
++-------+---------+-------------------------+----------+-----------+
+1 row in set (0.00 sec)
+
+# delete all records with a reason of “Rejected" in RMA table 
+
+mysql> DELETE FROM RMA 
+WHERE Reason = 'Rejected';
+Query OK, 596 rows affected (0.25 sec)
+
+# created output .csv of Orders table 
+
+mysql> SELECT * FROM Orders into outfile '/home/workspace/orders2.csv' 
+    -> FIELDS TERMINATED BY ',';
+Query OK, 37998 rows affected (0.27 sec)
+
+mysql> exit
+Bye
+
+#concatenated file to screen 
+/workspace$ pwd
+/workspace$ cat orders2.csv
+
+
+**** Begin Analysis 
+
+
+
 
 
