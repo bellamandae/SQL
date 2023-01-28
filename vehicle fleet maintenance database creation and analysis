@@ -1,0 +1,85 @@
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_bell_am |
++-------------------+
+| Department        |
+| Employee          |
+| tb2               |
++-------------------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE PartsMaintenance (
+    -> VehicleID VARCHAR(16) NOT NULL,
+    -> State VARCHAR(2),
+    -> Repair VARCHAR(30),
+    -> Reason VARCHAR(60),
+    -> Year VARCHAR(4),
+    -> Make VARCHAR(50),
+    -> BodyType VARCHAR(30));
+    
+mysql> show tables;
++-------------------+
+| Tables_in_bell_am |
++-------------------+
+| Department        |
+| Employee          |
+| PartsMaintenance  |
+| tb2               |
++-------------------+
+4 rows in set (0.00 sec)
+
+# creation of PartsMaintenance Table, do not allow NULL for VehicleID
+
+mysql> describe PartsMaintenance;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| VehicleID | varchar(16) | NO   |     | NULL    |       |
+| State     | varchar(2)  | YES  |     | NULL    |       |
+| Repair    | varchar(30) | YES  |     | NULL    |       |
+| Reason    | varchar(60) | YES  |     | NULL    |       |
+| Year      | varchar(4)  | YES  |     | NULL    |       |
+| Make      | varchar(50) | YES  |     | NULL    |       |
+| BodyType  | varchar(30) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> # load csv into PartsMaintenance 
+mysql> 
+mysql> LOAD DATA INFILE 'workspace/FleetMaintenanceRecords.csv'
+    -> INTO TABLE PartsMaintenance
+    -> FIELDS TERMINATED BY ','
+    -> LINES TERMINATED BY '\n'
+    -> IGNORE 1 ROWS;
+Query OK, 805 rows affected, 805 warnings (0.03 sec)
+Records: 805  Deleted: 0  Skipped: 0  Warnings: 805
+
+## Begin Analysis of PartsMaintenance Table per Business questions 
+
+# Which parts are being replaced most?
+
+mysql> SELECT Repair, COUNT(Repair) AS NumOfRepairs
+    -> FROM PartsMaintenance
+    -> GROUP BY Reason;
++--------------------------+--------------+
+| Repair                   | NumOfRepairs |
++--------------------------+--------------+
+| Dent Repair  Left Fender |           62 |
+| Brake line replacement   |           98 |
+| Windshield replacement   |           63 |
+| Battery replacment       |           56 |
+| Tire replacement         |           66 |
+| Tire repair              |           74 |
+| Fule tank                |           49 |
+| Fender replacement       |          309 |
+| Transmission             |           28 |
++--------------------------+--------------+
+9 rows in set (0.01 sec)
+
+
+# Is there a region of the country that experiences more part failures and replacements than others?
+
+
+
+
