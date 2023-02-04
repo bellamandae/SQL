@@ -390,9 +390,263 @@ Bye
 /workspace$ cat orders2.csv
 
 
-**** Begin Analysis 
+# update recenty added customer states to non-abbreviations 
+
+mysql> SELECT DISTINCT State FROM Customers;
++----------------+
+| State          |
++----------------+
+| Texas          |
+| Idaho          |
+| Florida        |
+| Mississippi    |
+| Pennsylvania   |
+| Kentucky       |
+| Maine          |
+| Nebraska       |
+| Connecticut    |
+| Minnesota      |
+| West Virginia  |
+| Alabama        |
+| Oregon         |
+| North Carolina |
+| Vermont        |
+| Arkansas       |
+| Iowa           |
+| New Mexico     |
+| South Dakota   |
+| Montana        |
+| Indiana        |
+| Tennessee      |
+| Washington     |
+| Utah           |
+| Arizona        |
+| Wisconsin      |
+| Oklahoma       |
+| Delaware       |
+| Louisiana      |
+| Wyoming        |
+| Hawaii         |
+| Maryland       |
+| New Hampshire  |
+| Kansas         |
+| California     |
+| Colorado       |
+| Rhode Island   |
+| Ohio           |
+| Nevada         |
+| North Dakota   |
+| Michigan       |
+| Illinois       |
+| New Jersey     |
+| Missouri       |
+| Georgia        |
+| South Carolina |
+| New York       |
+| Massachusetts  |
+| NY             |
+| NC             |
+| FL             |
+| CA             |
++----------------+
+52 rows in set (0.28 sec)
 
 
+mysql> UPDATE Customers 
+    -> SET State = 'New York'
+    -> WHERE State = 'NY';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> UPDATE Customers
+    -> SET State = 'North Carolina'
+    -> WHERE State = 'NC';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> UPDATE Customers
+    -> SET State = 'Florida'
+    -> WHERE State = 'FL';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> UPDATE Customers
+    -> SET State = 'California'
+    -> WHERE State = 'CA';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT DISTINCT State FROM Customers;
++----------------+
+| State          |
++----------------+
+| Texas          |
+| Idaho          |
+| Florida        |
+| Mississippi    |
+| Pennsylvania   |
+| Kentucky       |
+| Maine          |
+| Nebraska       |
+| Connecticut    |
+| Minnesota      |
+| West Virginia  |
+| Alabama        |
+| Oregon         |
+| North Carolina |
+| Vermont        |
+| Arkansas       |
+| Iowa           |
+| New Mexico     |
+| South Dakota   |
+| Montana        |
+| Indiana        |
+| Tennessee      |
+| Washington     |
+| Utah           |
+| Arizona        |
+| Wisconsin      |
+| Oklahoma       |
+| Delaware       |
+| Louisiana      |
+| Wyoming        |
+| Hawaii         |
+| Maryland       |
+| New Hampshire  |
+| Kansas         |
+| California     |
+| Colorado       |
+| Rhode Island   |
+| Ohio           |
+| Nevada         |
+| North Dakota   |
+| Michigan       |
+| Illinois       |
+| New Jersey     |
+| Missouri       |
+| Georgia        |
+| South Carolina |
+| New York       |
+| Massachusetts  |
++----------------+
+48 rows in set (0.03 sec)
+
+
+
+
+#### Analysis ###### 
+
+# Which State currently has the most amount of customers? 
+
+mysql> SELECT State, COUNT(*) AS num_of_customers
+    -> FROM Customers
+    -> GROUP BY State 
+    -> ORDER BY num_of_customers DESC;
++----------------+------------------+
+| State          | num_of_customers |
++----------------+------------------+
+| Massachusetts  |              982 |
+| Arkansas       |              854 |
+| West Virginia  |              843 |
+| Oregon         |              842 |
+| Idaho          |              839 |
+| Alabama        |              838 |
+| Mississippi    |              835 |
+| Tennessee      |              831 |
+| Connecticut    |              830 |
+| Delaware       |              824 |
+| Wisconsin      |              822 |
+| Kentucky       |              820 |
+| Montana        |              820 |
+| New Mexico     |              818 |
+| Iowa           |              814 |
+| Pennsylvania   |              813 |
+| Indiana        |              811 |
+| South Dakota   |              807 |
+| Minnesota      |              801 |
+| Louisiana      |              800 |
+| Wyoming        |              795 |
+| Vermont        |              793 |
+| Hawaii         |              792 |
+| New York       |              792 |
+| Washington     |              791 |
+| North Carolina |              786 |
+| Arizona        |              784 |
+| Missouri       |              782 |
+| Maryland       |              777 |
+| North Dakota   |              776 |
+| Florida        |              774 |
+| Rhode Island   |              773 |
+| California     |              771 |
+| New Hampshire  |              771 |
+| Maine          |              760 |
+| Michigan       |              760 |
+| Utah           |              759 |
+| Texas          |              759 |
+| Illinois       |              758 |
+| Oklahoma       |              756 |
+| Nevada         |              755 |
+| Ohio           |              746 |
+| Nebraska       |              732 |
+| Kansas         |              732 |
+| Colorado       |              728 |
+| New Jersey     |              725 |
+| Georgia        |              724 |
+| South Carolina |              713 |
++----------------+------------------+
+
+# Which region has the largest customer base? 
+
+mysql> SELECT 'Southwest' AS REGION, COUNT(*) AS num_of_customers
+    -> FROM Customers
+    -> WHERE State IN ('Arizona', 'New Mexico', 'Texas', 'Oklahoma')
+    -> UNION
+    -> SELECT 'Southeast' AS REGION, COUNT(*) AS num_of_customers
+    -> FROM Customers
+    -> WHERE State IN ('Arkansas', 'Louisiana', 'Mississippi', 'Alabama', 'Georgia', 'Florida', 'Kentucky', 'Tennessee', 'South Carolina', 'North Carolina', 'Virginia', 'West Virginia', 'Delaware', 'Maryland')
+    -> UNION
+    -> SELECT 'Northeast' AS REGION, COUNT(*) AS num_of_customers
+    -> FROM Customers
+    -> WHERE State IN ('Pennsylvania', 'New Jersey', 'New York', 'Connecticut', 'Rhode Island', 'Massachusetts', 'Vermont', 'New Hampshire', 'Maine')
+    -> UNION
+    -> SELECT 'Midwest' AS REGION, COUNT(*) AS num_of_customers
+    -> FROM Customers
+    -> WHERE State IN ('North Dakota', 'South Dakota', 'Kansas', 'Nebraska', 'Minnesota', 'Wisconsin', 'Iowa', 'Missouri', 'Michigan', 'Indiana', 'Illinois', 'Ohio')
+    -> UNION
+    -> SELECT 'West' AS REGION, COUNT(*) AS num_of_customers
+    -> FROM Customers 
+    -> WHERE State IN ('Washington', 'Idaho', 'Montana', 'Oregon', 'Wyoming', 'Colorado', 'Utah', 'Nevada', 'California');
+    
++-----------+------------------+
+| REGION    | num_of_customers |
++-----------+------------------+
+| Southwest |             3117 |
+| Southeast |            10419 |
+| Northeast |             7239 |
+| Midwest   |             9341 |
+| West      |             7100 |
++-----------+------------------+
+5 rows in set (0.08 sec)
+
+# What are the top 3 products being sold? 
+
+mysql> SELECT SKU, Description, COUNT(SKU) AS num_sold 
+    -> FROM Orders
+    -> GROUP BY SKU, Description 
+    -> ORDER BY num_sold DESC;
++------------+----------------------------------------------------+----------+
+| SKU        | Description                                        | num_sold |
++------------+----------------------------------------------------+----------+
+| BAS-48-1 C | Basic Switch 10/100/1000 BaseT 48 port             |     8385 |
+| ENT-48-40F | Enterprise Switch 40GigE SFP+ 48 port              |     6186 |
+| ENT-48-10F | Enterprise Switch 10GigE SFP+ 48 port              |     4329 |
+| BAS-08-1 C | Basic Switch  10/100/1000 BaseT 8 port             |     4285 |
+| ENT-24-10F | Enterprise Switch 10GigE SFP+ 24 Port              |     4275 |
+| ADV-24-10C | Advanced Switch 10GigE Copper 24 port              |     4178 |
+| ADV-48-10F | Advanced Switch 10 GigE Copper/Fiber 44 port coppe |     4174 |
+| ENT-24-40F | Enterprise Switch 40GigE SFP+ 24 port              |     2152 |
+| BAS-24-1 C | Basic Switch 10/100/1000 BaseT 24 port             |       34 |
++------------+----------------------------------------------------+----------+
+9 rows in set (0.07 sec)
+
+# Analyze the data to determine the top three products sold in the southeastern region of the United States.
 
 
 
